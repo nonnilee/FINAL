@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+  <title>Student Records</title>
+
+  <style>
+    body {
+      padding: 3rem;
+      margin: 0;
+      border: 0;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    table,
+    th,
+    td {
+      border: 1px solid black;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <h2>Record Input</h2>
+        <form id="registrationForm">
+          <div class="form-group">
+            <input type="text" id="name" class="form-control" placeholder="Name" required>
+          </div>
+          <div class="form-group">
+            <input type="text" id="course" class="form-control" placeholder="Course" required>
+          </div>
+          <div class="form-group">
+            <input type="text" id="section" class="form-control" placeholder="Section" required>
+          </div>
+          <button type="button" class="btn btn-primary" id="recordInput">Save Record</button>
+        </form>
+      </div>
+
+      <div class="col-md-6">
+        <h2>Records</h2>
+        <table class="table" id="recordTable">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Course</th>
+              <th>Section</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $("#recordInput").click(function () {
+        var name = $("#name").val();
+        var course = $("#course").val();
+        var section = $("#section").val();
+
+        var table = $("#recordTable tbody");
+        var row = $("<tr>");
+        var cell1 = $("<td>").text(name);
+        var cell2 = $("<td>").text(course);
+        var cell3 = $("<td>").text(section);
+        var cell4 = $("<td>").html("<button type='button' class='btn btn-danger deleteBtn'>Delete</button>");
+
+        row.append(cell1);
+        row.append(cell2);
+        row.append(cell3);
+        row.append(cell4);
+
+        table.append(row);
+      });
+
+      $(document).on("click", ".deleteBtn", function () {
+        $(this).closest("tr").remove();
+      });
+    });
+  </script>
+</body>
+
+</html>
